@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="calStyle.css" />
+  </head>
+  <body>
+    <form name="calc" action="#" onsubmit="submitData();return false" >
+<table>
+    <tr>
+        <td>
+            <input readonly type="text" name="input" size="16" id="answer"></input>
+             <input type="button" name="one" value="1" onclick="calc.input.value += '1'">
+            <input type="button" name="two" value="2" onclick="calc.input.value += '2'">
+            <input type="button" name="three" value="3" onclick="calc.input.value += '3'">
+            <input type="button" class="operator" name="plus" value="+" onclick="calc.input.value += ' + '">
+            <br>
+            <input type="button" name="four" value="4" onclick="calc.input.value += '4'">
+            <input type="button" name="five" value="5" onclick="calc.input.value += '5'">
+            <input type="button" name="six" value="6" onclick="calc.input.value += '6'">
+            <input type="button" class="operator" name="minus" value="-" onclick="calc.input.value += ' - '">
+             <br>
+             <input type="button" name="seven" value="7" onclick="calc.input.value += '7'">
+             <input type="button" name="eight" value="8" onclick="calc.input.value += '8'">
+             <input type="button" name="nine" value="9" onclick="calc.input.value += '9'"> 
+             <input type="button" class="operator" name="times" value="*" onclick="calc.input.value += ' * '">
+
+      
+             <br>
+             <input type="button" id="clear" name="clear" value=" C " onclick="calc.input.value=''">
+             <input type="button" name="zero" value="0" onclick="calc.input.value +='0'">
+             <input type="button" name="doit" value=" = " onclick="sumbitData()">
+             <input type="button" class="operator" name="div" value="/" onclick="calc.input.value += ' / '">
+             <br>
+        </td>
+    </tr>
+</table>
+ </form>
+    <script src="calJS.js"></script>
+  </body>
+</html>
