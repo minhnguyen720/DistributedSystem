@@ -1,2 +1,2 @@
 # DistributedSystem
-new file TicTacToe is an update of previous files. The update add authentication and login session, database connection, setting RMI server and fix login of the game
+new file TicTacToe is an update of previous files. The update adds authentication and login session, database connection, setting RMI server and fix bugs in game logic part
