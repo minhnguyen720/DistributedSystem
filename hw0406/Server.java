@@ -30,11 +30,13 @@ public class Server {
 
             // get data from database
            Student result = GradeManagement.getStudentById(14485);
-           double grade = result.getGrade();
+           // create  xml
+           var creator = new CreateXML();
+           String xmlStr = creator.createDocGrade(result);
 
            // send data back to client
            var out = new DataOutputStream(socket.getOutputStream());
-           out.writeUTF("Grade: " + Double.toString(grade));
+           out.writeUTF(xmlStr);
 
 
         } catch (IOException e) {

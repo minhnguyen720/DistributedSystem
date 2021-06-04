@@ -62,6 +62,46 @@ public class CreateXML {
         return user;
     }
 
+    private Element newGradeNode(Document doc, double grade) {
+        Element user = doc.createElement("student");
+        Element gradeNode = doc.createElement("grade");
+        gradeNode.appendChild(doc.createTextNode(Double.toString(grade)));
+        user.appendChild(gradeNode);
+
+        return user;
+    }
+
+    
+    public String createDocGrade(Student student) {
+        String output = "";
+        try {
+            // obj to doc
+            DocumentBuilderFactory dbFac = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFac.newDocumentBuilder();
+            doc = dBuilder.newDocument();
+
+            // create root node
+            Element root = doc.createElement("students");
+            // add 'user' node to the root node
+            Element node = newGradeNode(doc, student.getGrade());
+            root.appendChild(node);
+            // add to doc
+            doc.appendChild(root);
+
+            // doc is ready
+
+            // converting result to file
+            var convertXML = new ConvertXML(doc);
+            output = convertXML.convertDoc2XmlString();
+            
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        return output;
+    }
+
     public Document getDoc() {
         return doc;
     }
