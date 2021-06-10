@@ -1,12 +1,18 @@
+package hw0806;
+
 import java.io.DataInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import hw0806.xmlUtils.XmlToObj;
 
 public class Server2 {
     private final static int PORT = 2001;
     private static DataInputStream in;
+    public static List<Student> students = new ArrayList<>();
 
     public static void main(String[] args) {
         try {
@@ -17,14 +23,26 @@ public class Server2 {
 
             // receive data from client
             in = new DataInputStream(client.getInputStream());
-            // print xml
+
             String dataFromClient = in.readUTF();
-            var converter = new XmlToObj(dataFromClient);
-            Student student = converter.getStudent();
+
+            StringTokenizer tokenizer = new StringTokenizer(dataFromClient, ",");
+            List<String> tokens = new ArrayList<>();
+            while(tokenizer.hasMoreTokens()) {
+                tokens.add(tokenizer.nextToken());
+            }
 
             // add student to database
-            GradeManagementServer2.addStudentToTable(student);
-            SynchronizeDB.migrate();
+            XmlToObj converter = null;
+            for (int i = 0; i < tokens.size(); i++) {
+                converter = new XmlToObj(tokens.get(i));
+                Student student = converter.getStudent();
+                students.add(student);
+            }
+
+            for (int i = 0; i < students.size(); i++) {
+                GradeManagementServer2.addStudentToTable(students.get(i));
+            }
 
             // closing
             server.close();

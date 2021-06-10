@@ -1,3 +1,5 @@
+package hw0806;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +19,7 @@ public class GradeManagementServer1 {
                     "WillieDaSpidie720");
             Statement st = con.createStatement();
 
+            // check duplicate id
             if (getStudentById(id) == null)
                 st.executeUpdate("INSERT INTO table1 values(" + student.getId() + "," + "\"" + student.getName() + "\""
                         + "," + student.getGrade() + ")");

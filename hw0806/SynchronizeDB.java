@@ -1,26 +1,32 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package hw0806;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SynchronizeDB {
-    public static void migrate() throws SQLException {
-        Connection connA = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/db1", "root", "WillieDaSpidie720");
-        Connection connB = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/db2", "root", "WillieDaSpidie720");
+    public static void synchronizedDb(List<Student> list) {
+        for(int i = 0; i < list.size();i++) {
+            GradeManagementServer1.addStudentToTable(list.get(i));
+            GradeManagementServer2.addStudentToTable(list.get(i));
+        }
+    }
 
-        PreparedStatement stmA = connA.prepareStatement("select * from table1 where 1=1");
-        PreparedStatement stmB = connB.prepareStatement("insert into table2 values(?,?,?)");
+    public static List<Student> isDuplicate(List<Student> list, List<Student> other) {
+        List<Student> syncList = new ArrayList<>(list);
 
-        ResultSet rs = stmA.executeQuery();
-        while (rs.next()) {
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                stmB.setObject(i + 1, rs.getObject(i + 1));
+        // checking duplicate id
+        boolean flag = false;
+        for (int i = 0; i < other.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if(!(other.get(j).getId() == list.get(i).getId()))
+                    flag = true;
+                else
+                    flag = false;
             }
-            stmB.executeUpdate();
+                if(flag)
+                    syncList.add(other.get(i));
         }
 
-        connA.close();
-        connB.close();
+        return syncList;
     }
 }

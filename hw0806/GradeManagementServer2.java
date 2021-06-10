@@ -1,3 +1,6 @@
+package hw0806;
+
+import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -47,5 +50,20 @@ public class GradeManagementServer2 {
         }
 
         return student;
+    }
+
+    public static List<Student> getAllStudents() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/db2", "root",
+                "WillieDaSpidie720");
+
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM table2;");
+        List<Student> list = new ArrayList<>();
+        while(rs.next()) {
+            list.add(new Student(rs.getInt(1), rs.getString(2), rs.getFloat(3)));
+        }
+
+        return list;
     }
 }

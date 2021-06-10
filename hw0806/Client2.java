@@ -1,3 +1,5 @@
+package hw0806;
+
 import java.io.DataOutputStream;
 import java.net.Socket;
 
@@ -12,10 +14,13 @@ public class Client2 {
         try {
             var clientPort2001 = new Socket(LOCAL, PORT);
             var XML_creator_2 = new CreateXML();
-            String xmlString2 = XML_creator_2.createDoc(new Student(2, "jason", 2.0f));
+            String kirin = XML_creator_2.createDoc(new Student(3, "kirin", 2.0f));
+            String nhu = XML_creator_2.createDoc(new Student(4,"nhu",2.1f));
+
+            String dataToServer = kirin + "," + nhu;
 
             var out2 = new DataOutputStream(clientPort2001.getOutputStream());
-            out2.writeUTF(xmlString2);
+            out2.writeUTF(dataToServer);
 
             clientPort2001.close();
 
