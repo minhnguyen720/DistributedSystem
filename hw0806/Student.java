@@ -1,9 +1,9 @@
 package hw0806;
 
 public class Student {
-    private String name;
-    private int id;
-    private float grade;
+    private final String name;
+    private final int id;
+    private final float grade;
 
     public Student(int id, String name, float grade) {
         this.id = id;
