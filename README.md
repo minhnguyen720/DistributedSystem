@@ -1,1 +1,2 @@
-Now server can receive more than 1 xml string
+$Homework 0806
+Sync 2 different server databases
