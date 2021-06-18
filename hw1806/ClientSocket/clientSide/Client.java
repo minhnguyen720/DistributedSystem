@@ -12,7 +12,12 @@ public class Client {
 
         // send data to server
         var out = new DataOutputStream(clientSocket.getOutputStream());
-        String jsonString = Reader.read();
+
+        // create book object
+        var willie = new Author("willie",21);
+        var book = new Book("hello world","vgu",willie);
+
+        String jsonString = Reader.read(book);
         out.writeUTF(jsonString);
 
     }
