@@ -25,7 +25,7 @@ public class JSONWriter {
         jason.put("name", "jason");
         otherArr.add(jason);
 
-        jsonObject.put("name", otherArr);
+        jsonObject.put("names", otherArr);
         
         // for accounts
         var jsonArr = new JSONArray();
