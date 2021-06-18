@@ -1,0 +1,8 @@
+{
+  "title": "hello world",
+  "publisher": "vgu",
+  "author": [{
+    "name": "willie",
+    "age": 21
+  }]
+}
